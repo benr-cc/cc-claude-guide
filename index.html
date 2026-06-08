@@ -249,7 +249,7 @@
   .pc pre{margin:0;padding:16px;font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text);white-space:pre-wrap;word-break:break-word;background:transparent;flex:1;}
 
   /* ---------- stats / case studies ---------- */
-  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px;}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:30px;}
   .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:left;}
   .stat .big{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);letter-spacing:-.03em;color:var(--accent);line-height:1;}
   .stat .cap{font-size:13px;color:var(--text-2);margin-top:9px;line-height:1.4;}
@@ -300,6 +300,20 @@
   .callout .clabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);padding:5px 9px;border-radius:6px;flex:none;}
   .callout p{margin:0;color:var(--text-2);font-size:14.5px;line-height:1.55;}
   @media(max-width:760px){.lights{grid-template-columns:1fr;}}
+
+  /* ---------- context capacity ---------- */
+  .capacity{position:relative;padding:88px 0;border-top:1px solid var(--line);background:var(--ink-2);overflow:hidden;}
+  .capacity .cap-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .capacity .cap-bg .grid{position:absolute;inset:-2px;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:54px 54px;-webkit-mask-image:radial-gradient(110% 90% at 16% 50%,#000,transparent 60%);mask-image:radial-gradient(110% 90% at 16% 50%,#000,transparent 60%);opacity:.45;}
+  .capacity .cap-bg .glow{position:absolute;left:-180px;top:50%;transform:translateY(-50%);width:640px;height:640px;background:radial-gradient(circle,rgba(255,90,44,.15),transparent 60%);filter:blur(18px);}
+  .capgrid{position:relative;z-index:1;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center;}
+  .bignum{font-family:var(--font-display);font-weight:800;font-size:clamp(60px,12vw,148px);line-height:.86;letter-spacing:-.045em;color:var(--text);}
+  .bignum .u{display:block;font-family:var(--font-mono);font-weight:500;font-size:clamp(12px,1.4vw,15px);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-top:18px;}
+  .cap-right .ks{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);}
+  .cap-right h3{font-family:var(--font-display);font-weight:700;font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;margin:12px 0 14px;line-height:1.05;}
+  .cap-right p{margin:0 0 14px;color:var(--text-2);font-size:16px;line-height:1.6;max-width:46ch;}
+  .cap-right .attr{font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;color:var(--text-3);margin:0;}
+  @media(max-width:760px){.capgrid{grid-template-columns:1fr;gap:22px;}}
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line);padding:64px 0 70px;background:var(--ink-2);}
@@ -553,6 +567,25 @@
   </div>
 </section>
 
+<!-- CONTEXT CAPACITY -->
+<section class="capacity" id="context">
+  <div class="cap-bg"><div class="grid"></div><div class="glow"></div></div>
+  <div class="wrap">
+    <div class="capgrid">
+      <div class="reveal" data-reveal>
+        <div class="bignum">~750,000<span class="u">words of context</span></div>
+      </div>
+      <div class="cap-right reveal" data-reveal>
+        <div class="ks">On giving context</div>
+        <h3>Don't hold back.</h3>
+        <p>That's roughly how much Claude can read in a single conversation, about the first four or five Harry Potter books. So feed it the messy background, the long email thread, the full brief, the reference docs.</p>
+        <p>The fear of giving it "too much" is the wrong fear. The more Claude knows, the better it answers. Under-sharing is what produces generic, off-brand results.</p>
+        <p class="attr">Andrew Ng · AI Prompting Course</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- PLAYBOOK -->
 <section class="block" id="playbook">
   <div class="wrap">
@@ -581,7 +614,6 @@
         <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
           <p>The single most important habit. <b>The new-hire test:</b> if an intelligent new employee couldn't do the task with what you just said, neither can Claude.</p>
           <p>Context means the goal, the audience, the constraints, the source material, and the history of what you've tried. Without it, Claude fills the gaps with its best guess, which is where generic and off-brand output comes from.</p>
-          <p>Don't worry about overloading it. It reads roughly 750,000 words of context, about the first four or five Harry Potter books. Don't hold back.</p>
         </div></div></div>
       </div>
       <div class="item" data-phase="context">
@@ -802,7 +834,6 @@
 
     <div class="stats stagger" data-reveal>
       <div class="stat"><div class="big">9,000+</div><div class="cap">files in a messy Downloads folder, sorted in about an hour</div></div>
-      <div class="stat"><div class="big">~750k</div><div class="cap">words of context Claude can read in one go</div></div>
       <div class="stat"><div class="big">2&ndash;4</div><div class="cap">publishable articles a month from the content engine</div></div>
       <div class="stat"><div class="big">25+</div><div class="cap">live controls in a 3D viewer built with zero coding</div></div>
     </div>
