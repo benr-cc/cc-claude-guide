@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Claude at Cane Creek — Field Guide</title>
+<meta name="description" content="Everything from both Claude decks, on one page. The five-minute version for the Cane Creek team." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#0B0C0F;
+    --ink-2:#101218;
+    --panel:#15171E;
+    --panel-2:#1A1D25;
+    --line:#262A33;
+    --line-2:#363B47;
+    --text:#ECEDE7;
+    --text-2:#A4A8B2;
+    --text-3:#6E727C;
+    --accent:#FF5A2C;
+    --accent-2:#FF8159;
+    --accent-soft:rgba(255,90,44,.10);
+    --accent-line:rgba(255,90,44,.35);
+    --good:#56C98A;
+    --bad:#E96B61;
+    --warn:#E6B33C;
+    --steel:#7FA8C9;
+    --font-display:'Bricolage Grotesque',ui-sans-serif,system-ui,sans-serif;
+    --font-body:'Hanken Grotesk',ui-sans-serif,system-ui,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --maxw:1120px;
+    --nav-h:62px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--accent);color:#fff;}
+
+  /* grain overlay */
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    pointer-events:none;z-index:9999;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    height:var(--nav-h);
+    display:flex;align-items:center;
+    background:rgba(11,12,15,.72);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;width:100%;}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:800;font-size:17px;letter-spacing:-.01em;}
+  .brand .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px 1px var(--accent);flex:none;}
+  .brand small{font-family:var(--font-mono);font-weight:500;font-size:10.5px;color:var(--text-3);letter-spacing:.08em;text-transform:uppercase;}
+  .navlinks{display:flex;gap:4px;align-items:center;}
+  .navlinks a{
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.04em;
+    color:var(--text-2);padding:7px 11px;border-radius:7px;transition:.18s;text-transform:uppercase;
+  }
+  .navlinks a:hover{color:var(--text);background:var(--panel);}
+  .navlinks a.active{color:var(--accent);}
+  .progress{position:fixed;top:var(--nav-h);left:0;height:2px;background:var(--accent);width:0;z-index:101;box-shadow:0 0 10px var(--accent);}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:calc(var(--nav-h) + 78px) 0 70px;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;}
+  .hero-bg .grid{
+    position:absolute;inset:-2px;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:54px 54px;
+    -webkit-mask-image:radial-gradient(120% 90% at 70% 0%,#000 0%,transparent 62%);
+    mask-image:radial-gradient(120% 90% at 70% 0%,#000 0%,transparent 62%);
+    opacity:.5;
+  }
+  .hero-bg .glow{
+    position:absolute;top:-260px;right:-160px;width:760px;height:760px;
+    background:radial-gradient(circle,rgba(255,90,44,.22),transparent 60%);
+    filter:blur(20px);
+  }
+  .hero .wrap{position:relative;z-index:1;}
+  .kicker{
+    display:inline-flex;align-items:center;gap:9px;
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);
+    border:1px solid var(--accent-line);background:var(--accent-soft);
+    padding:6px 12px;border-radius:100px;margin-bottom:26px;
+  }
+  .kicker .pulse{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 2.4s infinite;}
+  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.25;}}
+  h1.hero-title{
+    font-family:var(--font-display);font-weight:800;
+    font-size:clamp(40px,6.6vw,82px);line-height:.99;letter-spacing:-.025em;
+    margin:0 0 22px;max-width:15ch;
+  }
+  h1.hero-title em{font-style:normal;color:var(--accent);}
+  .hero-sub{font-size:clamp(17px,2vw,21px);color:var(--text-2);max-width:56ch;margin:0 0 14px;line-height:1.55;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px;}
+  .pill{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--text-2);border:1px solid var(--line);border-radius:100px;padding:6px 13px;background:var(--ink-2);}
+
+  /* ---------- start-here cards ---------- */
+  .startcards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px;}
+  .scard{
+    position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px 22px 22px;
+    transition:transform .25s,border-color .25s,background .25s;overflow:hidden;
+  }
+  .scard:hover{transform:translateY(-4px);border-color:var(--line-2);background:var(--panel-2);}
+  .scard .num{font-family:var(--font-mono);font-size:12px;color:var(--accent);letter-spacing:.1em;}
+  .scard h3{font-family:var(--font-display);font-weight:700;font-size:20px;letter-spacing:-.01em;margin:14px 0 8px;}
+  .scard p{margin:0;color:var(--text-2);font-size:15px;line-height:1.55;}
+  .scard .tag{display:inline-block;margin-top:14px;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--text-3);border:1px solid var(--line);padding:4px 9px;border-radius:100px;}
+
+  /* ---------- section frame ---------- */
+  section.block{padding:84px 0;border-top:1px solid var(--line);position:relative;}
+  .eyebrow{display:flex;align-items:baseline;gap:14px;margin-bottom:30px;}
+  .eyebrow .idx{font-family:var(--font-mono);font-size:13px;color:var(--accent);letter-spacing:.08em;}
+  .eyebrow h2{font-family:var(--font-display);font-weight:700;font-size:clamp(27px,3.6vw,40px);letter-spacing:-.02em;margin:0;line-height:1.05;}
+  .lead{color:var(--text-2);font-size:18px;max-width:62ch;margin:-14px 0 34px;}
+
+  /* ---------- stages (mindset) ---------- */
+  .stages{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:stretch;}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px;position:relative;}
+  .stage.live{border-color:var(--accent-line);background:linear-gradient(180deg,var(--accent-soft),transparent 80%);}
+  .stage .lbl{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
+  .stage.live .lbl{color:var(--accent);}
+  .stage h4{font-family:var(--font-display);font-weight:700;font-size:19px;margin:9px 0 9px;letter-spacing:-.01em;}
+  .stage .q{font-family:var(--font-mono);font-size:12.5px;color:var(--text);background:var(--ink-2);border:1px solid var(--line);border-radius:8px;padding:9px 11px;line-height:1.5;margin-bottom:11px;}
+  .stage p{margin:0;color:var(--text-2);font-size:14px;line-height:1.5;}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:42px;margin-top:46px;}
+  @media(max-width:760px){.twocol{grid-template-columns:1fr;gap:30px;}}
+  .minihead{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin-bottom:16px;}
+  ol.daily{list-style:none;counter-reset:d;margin:0;padding:0;}
+  ol.daily li{counter-increment:d;position:relative;padding:0 0 16px 44px;}
+  ol.daily li::before{content:counter(d,decimal-leading-zero);position:absolute;left:0;top:-1px;font-family:var(--font-mono);font-size:13px;color:var(--accent);border:1px solid var(--accent-line);border-radius:8px;width:30px;height:30px;display:flex;align-items:center;justify-content:center;}
+  ol.daily li b{font-family:var(--font-display);font-weight:700;font-size:16px;display:block;margin-bottom:2px;}
+  ol.daily li span{color:var(--text-2);font-size:14.5px;}
+  .reframe{display:flex;flex-direction:column;gap:12px;}
+  .rf{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;}
+  .rf .fear{color:var(--text);font-weight:600;font-size:14.5px;margin-bottom:5px;}
+  .rf .fear::before{content:"“";color:var(--bad);font-weight:700;margin-right:2px;}
+  .rf .fear::after{content:"”";color:var(--bad);font-weight:700;}
+  .rf .ans{color:var(--text-2);font-size:14px;line-height:1.5;}
+
+  /* ---------- pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .pillar{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column;transition:transform .25s,border-color .25s;}
+  .pillar:hover{transform:translateY(-4px);border-color:var(--accent-line);}
+  .picon{width:46px;height:46px;border-radius:11px;background:var(--accent-soft);border:1px solid var(--accent-line);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .picon svg{width:23px;height:23px;stroke:var(--accent);fill:none;stroke-width:1.7;}
+  .pillar .pn{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-3);}
+  .pillar h3{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.01em;margin:6px 0 10px;}
+  .pillar .def{color:var(--text-2);font-size:14.5px;line-height:1.55;margin:0 0 16px;}
+  .pillar .when{font-family:var(--font-mono);font-size:11px;color:var(--accent);letter-spacing:.03em;text-transform:uppercase;margin-bottom:7px;}
+  .pillar ul{margin:0;padding-left:18px;color:var(--text-2);font-size:14px;line-height:1.6;}
+  .pillar ul li::marker{color:var(--accent);}
+
+  /* ---------- setup ---------- */
+  .setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+  @media(max-width:760px){.setup-grid{grid-template-columns:1fr;gap:28px;}}
+  .checks{display:flex;flex-direction:column;gap:12px;}
+  .check{display:flex;gap:13px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 17px;align-items:flex-start;}
+  .check .ck{flex:none;width:22px;height:22px;border-radius:6px;border:1px solid var(--accent-line);background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  .check .ck svg{width:13px;height:13px;stroke:var(--accent);fill:none;stroke-width:2.4;}
+  .check b{font-family:var(--font-display);font-weight:700;font-size:15.5px;display:block;margin-bottom:2px;}
+  .check span{color:var(--text-2);font-size:14px;line-height:1.5;}
+  ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;position:relative;}
+  ol.steps::before{content:"";position:absolute;left:14px;top:8px;bottom:8px;width:1px;background:var(--line);}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 20px 44px;}
+  ol.steps li:last-child{padding-bottom:0;}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:29px;height:29px;border-radius:50%;background:var(--ink);border:1px solid var(--accent-line);color:var(--accent);font-family:var(--font-mono);font-size:13px;display:flex;align-items:center;justify-content:center;}
+  ol.steps li b{font-family:var(--font-display);font-weight:700;font-size:15.5px;display:block;margin-bottom:2px;}
+  ol.steps li span{color:var(--text-2);font-size:14px;line-height:1.5;}
+
+  /* ---------- playbook ---------- */
+  .loop{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:34px;}
+  .loopstep{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 16px;position:relative;}
+  .loopstep .ls{font-family:var(--font-mono);font-size:10px;color:var(--accent);letter-spacing:.1em;}
+  .loopstep b{font-family:var(--font-display);font-weight:700;font-size:16px;display:block;margin:7px 0 5px;}
+  .loopstep p{margin:0;color:var(--text-2);font-size:13px;line-height:1.45;}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px;}
+  .filters button{
+    font-family:var(--font-mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;cursor:pointer;
+    background:var(--ink-2);color:var(--text-2);border:1px solid var(--line);border-radius:100px;padding:8px 15px;transition:.18s;
+  }
+  .filters button:hover{color:var(--text);border-color:var(--line-2);}
+  .filters button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .acc{display:flex;flex-direction:column;gap:10px;}
+  .item{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:border-color .2s;}
+  .item.hide{display:none;}
+  .item:hover{border-color:var(--line-2);}
+  .item.open{border-color:var(--accent-line);}
+  .ihead{display:flex;align-items:center;gap:16px;padding:17px 20px;cursor:pointer;user-select:none;}
+  .ihead .ph{font-family:var(--font-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);border:1px solid var(--line);border-radius:5px;padding:3px 7px;flex:none;min-width:74px;text-align:center;}
+  .item.open .ihead .ph{color:var(--accent);border-color:var(--accent-line);}
+  .ihead h4{font-family:var(--font-display);font-weight:700;font-size:17px;letter-spacing:-.01em;margin:0;flex:1;}
+  .ihead .chev{flex:none;width:18px;height:18px;stroke:var(--text-3);fill:none;stroke-width:2;transition:transform .25s;}
+  .item.open .ihead .chev{transform:rotate(180deg);stroke:var(--accent);}
+  .ibody{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease;}
+  .item.open .ibody{grid-template-rows:1fr;}
+  .ibody-in{overflow:hidden;}
+  .ibody-pad{padding:0 20px 20px;color:var(--text-2);font-size:15px;line-height:1.6;}
+  .ibody-pad p{margin:0 0 10px;}
+  .ibody-pad .ex{font-family:var(--font-mono);font-size:13px;color:var(--text);background:var(--ink-2);border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:8px;padding:11px 13px;margin:10px 0;line-height:1.55;}
+  .ibody-pad ul{margin:8px 0;padding-left:18px;}
+  .ibody-pad ul li::marker{color:var(--accent);}
+
+  table.mini{width:100%;border-collapse:collapse;margin:6px 0 2px;font-size:13.5px;}
+  table.mini th,table.mini td{text-align:left;padding:9px 11px;border:1px solid var(--line);vertical-align:top;}
+  table.mini th{font-family:var(--font-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--text-3);background:var(--ink-2);font-weight:500;}
+  table.mini td b{color:var(--text);}
+  .tablescroll{overflow-x:auto;}
+
+  /* ---------- prompt library ---------- */
+  .prompts{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:760px){.prompts{grid-template-columns:1fr;}}
+  .pc{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s;}
+  .pc:hover{border-color:var(--line-2);}
+  .pc-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line);gap:12px;}
+  .pc-head .t{font-family:var(--font-display);font-weight:700;font-size:15px;letter-spacing:-.01em;}
+  .copybtn{
+    font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;cursor:pointer;flex:none;
+    background:var(--ink-2);color:var(--text-2);border:1px solid var(--line);border-radius:7px;padding:6px 11px;display:flex;align-items:center;gap:6px;transition:.18s;
+  }
+  .copybtn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+  .copybtn:hover{color:var(--text);border-color:var(--line-2);}
+  .copybtn.done{color:var(--good);border-color:var(--good);}
+  .pc pre{margin:0;padding:16px;font-family:var(--font-mono);font-size:12.5px;line-height:1.6;color:var(--text);white-space:pre-wrap;word-break:break-word;background:transparent;flex:1;}
+
+  /* ---------- stats / case studies ---------- */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:30px;}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:left;}
+  .stat .big{font-family:var(--font-display);font-weight:800;font-size:clamp(30px,4vw,42px);letter-spacing:-.03em;color:var(--accent);line-height:1;}
+  .stat .cap{font-size:13px;color:var(--text-2);margin-top:9px;line-height:1.4;}
+  .cases{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:760px){.cases{grid-template-columns:1fr;}}
+  .case{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 22px;}
+  .case .ct{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-.01em;margin:0 0 9px;}
+  .case p{margin:0;color:var(--text-2);font-size:14.5px;line-height:1.6;}
+  .case .lesson{margin-top:12px;font-family:var(--font-mono);font-size:11.5px;color:var(--accent);letter-spacing:.02em;border-top:1px solid var(--line);padding-top:11px;}
+
+  /* ---------- limits ---------- */
+  .limits{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+  @media(max-width:760px){.limits{grid-template-columns:1fr;}}
+  .limit{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:19px 20px;}
+  .limit b{font-family:var(--font-display);font-weight:700;font-size:16px;display:block;margin-bottom:6px;}
+  .limit span{color:var(--text-2);font-size:14px;line-height:1.55;}
+  .limit .use{display:block;margin-top:9px;font-family:var(--font-mono);font-size:11.5px;color:var(--steel);letter-spacing:.02em;}
+
+  /* ---------- do / don't ---------- */
+  .dd{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media(max-width:640px){.dd{grid-template-columns:1fr;}}
+  .ddcol{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 22px;}
+  .ddcol h3{font-family:var(--font-display);font-weight:700;font-size:18px;margin:0 0 14px;display:flex;align-items:center;gap:9px;}
+  .ddcol.do h3{color:var(--good);}
+  .ddcol.dont h3{color:var(--bad);}
+  .ddcol ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px;}
+  .ddcol li{display:flex;gap:10px;font-size:14.5px;color:var(--text-2);line-height:1.45;}
+  .ddcol li svg{flex:none;width:16px;height:16px;margin-top:3px;fill:none;stroke-width:2.4;}
+  .ddcol.do li svg{stroke:var(--good);}
+  .ddcol.dont li svg{stroke:var(--bad);}
+
+  /* ---------- security ---------- */
+  .bigstate{margin:36px 0 34px;padding:26px 28px;background:linear-gradient(180deg,var(--accent-soft),transparent 90%);border:1px solid var(--accent-line);border-radius:16px;}
+  .bigstate p{margin:0;font-family:var(--font-display);font-weight:700;font-size:clamp(19px,2.5vw,26px);letter-spacing:-.015em;line-height:1.3;color:var(--text);}
+  .bigstate p span{color:var(--accent);}
+  .check.note .ck{border-color:var(--line-2);background:var(--ink-2);}
+  .check.note .ck svg{stroke:var(--steel);}
+  .lights{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  .light{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--line-2);border-radius:14px;padding:20px 20px;}
+  .light .lh{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .light .ldot{width:11px;height:11px;border-radius:50%;flex:none;}
+  .light .lname{font-family:var(--font-mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;font-weight:600;}
+  .light p{margin:0;color:var(--text-2);font-size:14px;line-height:1.5;}
+  .light.green{border-top-color:var(--good);}.light.green .ldot{background:var(--good);box-shadow:0 0 12px var(--good);}.light.green .lname{color:var(--good);}
+  .light.yellow{border-top-color:var(--warn);}.light.yellow .ldot{background:var(--warn);box-shadow:0 0 12px var(--warn);}.light.yellow .lname{color:var(--warn);}
+  .light.red{border-top-color:var(--bad);}.light.red .ldot{background:var(--bad);box-shadow:0 0 12px var(--bad);}.light.red .lname{color:var(--bad);}
+  .callout{margin-top:30px;background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--steel);border-radius:12px;padding:18px 20px;display:flex;gap:15px;align-items:flex-start;}
+  .callout .clabel{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);border:1px solid var(--line);padding:5px 9px;border-radius:6px;flex:none;}
+  .callout p{margin:0;color:var(--text-2);font-size:14.5px;line-height:1.55;}
+  @media(max-width:760px){.lights{grid-template-columns:1fr;}}
+
+  /* ---------- footer ---------- */
+  footer{border-top:1px solid var(--line);padding:64px 0 70px;background:var(--ink-2);}
+  .ftgrid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:34px;}
+  @media(max-width:760px){.ftgrid{grid-template-columns:1fr;gap:26px;}}
+  footer h4{font-family:var(--font-mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-3);margin:0 0 14px;}
+  footer p{color:var(--text-2);font-size:14.5px;line-height:1.6;margin:0 0 10px;}
+  footer a.link{color:var(--accent);border-bottom:1px solid var(--accent-line);transition:.18s;}
+  footer a.link:hover{color:var(--accent-2);border-color:var(--accent-2);}
+  .ftclose{font-family:var(--font-display);font-weight:700;font-size:clamp(20px,3vw,27px);letter-spacing:-.02em;color:var(--text);max-width:18ch;line-height:1.1;}
+  .ftbar{margin-top:48px;border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--font-mono);font-size:11px;color:var(--text-3);letter-spacing:.04em;}
+
+  /* ---------- reveal animation ---------- */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+  .stagger>*{opacity:0;transform:translateY(20px);transition:opacity .55s,transform .55s;}
+  .stagger.in>*{opacity:1;transform:none;}
+  .stagger.in>*:nth-child(2){transition-delay:.07s;}
+  .stagger.in>*:nth-child(3){transition-delay:.14s;}
+  .stagger.in>*:nth-child(4){transition-delay:.21s;}
+
+  /* ---------- responsive ---------- */
+  @media(max-width:900px){
+    .startcards,.pillars,.stages,.loop{grid-template-columns:1fr;}
+    .stats{grid-template-columns:1fr 1fr;}
+    .navlinks{display:none;}
+  }
+  @media(max-width:520px){
+    .wrap{padding:0 18px;}
+    body{font-size:16px;}
+    .ihead{gap:11px;padding:15px 15px;}
+    .ihead .ph{min-width:0;}
+  }
+  [id]{scroll-margin-top:78px;}
+
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;}
+    .reveal,.stagger>*{opacity:1;transform:none;}
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="dot"></span>Cane Creek <small>/ Claude Field Guide</small></a>
+    <div class="navlinks">
+      <a href="#mindset">Mindset</a>
+      <a href="#pillars">Pillars</a>
+      <a href="#setup">Setup</a>
+      <a href="#security">Security</a>
+      <a href="#playbook">Playbook</a>
+      <a href="#library">Prompts</a>
+      <a href="#proof">Proof</a>
+      <a href="#limits">Limits</a>
+    </div>
+  </div>
+</nav>
+<div class="progress" id="progress"></div>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-bg"><div class="grid"></div><div class="glow"></div></div>
+  <div class="wrap">
+    <span class="kicker"><span class="pulse"></span>Internal · Cane Creek · Claude Series</span>
+    <h1 class="hero-title">Use Claude like a <em>collaborator</em>, not a chatbot.</h1>
+    <p class="hero-sub">Both decks, distilled to one page you can actually read. Skim the top in five minutes, expand only what you need, and steal the prompts at the bottom.</p>
+    <div class="hero-meta">
+      <span class="pill">~5 min skim</span>
+      <span class="pill">Replaces 2 slide decks</span>
+      <span class="pill">Built with Claude</span>
+    </div>
+
+    <div class="startcards stagger" data-reveal>
+      <div class="scard">
+        <div class="num">01</div>
+        <h3>Open Claude every day</h3>
+        <p>Make it the first place you go when you don't know where to start. Build the habit first, everything else follows.</p>
+        <span class="tag">Lowest effort</span>
+      </div>
+      <div class="scard">
+        <div class="num">02</div>
+        <h3>Set up one Project</h3>
+        <p>Pick a workflow you repeat. Load the files a new hire would need. Write a paragraph of instructions. Reuse it forever.</p>
+        <span class="tag">Best long-term ROI</span>
+      </div>
+      <div class="scard">
+        <div class="num">03</div>
+        <h3>Give it your hardest task</h3>
+        <p>The thing you've put off as too big or too messy. Hand it to Claude first and see where it gets you.</p>
+        <span class="tag">Where the leverage lives</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MINDSET -->
+<section class="block" id="mindset">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">01</span><h2>The mindset</h2></div>
+    <p class="lead reveal" data-reveal>Most people use Claude the way they use Google: one question, one answer, stop. That's the lowest-value way to use it. It's a thinking partner that reasons, synthesizes, and builds on context. Live in stage three.</p>
+
+    <div class="stages stagger" data-reveal>
+      <div class="stage">
+        <div class="lbl">Stage 1 — Search box</div>
+        <h4>Lookup</h4>
+        <div class="q">"Who are our closest competitors?"</div>
+        <p>Information retrieval. One question, one answer.</p>
+      </div>
+      <div class="stage">
+        <div class="lbl">Stage 2 — Assistant</div>
+        <h4>Drafting</h4>
+        <div class="q">"Help me rewrite this email."</div>
+        <p>Polishing and summarizing. Most people stop here.</p>
+      </div>
+      <div class="stage live">
+        <div class="lbl">Stage 3 — Collaborator</div>
+        <h4>Leverage</h4>
+        <div class="q">"Build me a content engine. Architect a tool with me."</div>
+        <p>Systems and output you couldn't make alone. This is the goal.</p>
+      </div>
+    </div>
+
+    <div class="twocol">
+      <div>
+        <div class="minihead">Three questions to ask yourself every day</div>
+        <ol class="daily reveal" data-reveal>
+          <li><b>How could this be improved with AI?</b><span>Take a task you already do and ask whether Claude could speed it up, sharpen it, or replace a step.</span></li>
+          <li><b>What can I do now that I couldn't before?</b><span>What used to need a contractor, weeks of work, or a skill you don't have?</span></li>
+          <li><b>Try it anyway.</b><span>Think it's too big or too complex? Push hard, find the edges. You'll surprise yourself.</span></li>
+        </ol>
+      </div>
+      <div>
+        <div class="minihead">Fear is the bug, not the feature</div>
+        <div class="reframe reveal" data-reveal>
+          <div class="rf"><div class="fear">It's too technical for me.</div><div class="ans">Claude walks you through technical things you never thought possible. You don't need to know how before you start.</div></div>
+          <div class="rf"><div class="fear">I'll mess something up.</div><div class="ans">Use it on low-stakes work first. The cost of a mistake is rarely worse than the cost of not trying.</div></div>
+          <div class="rf"><div class="fear">What if it's wrong?</div><div class="ans">It will be, sometimes. Check it and give it context. A rough draft you validate still beats a blank page.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="block" id="pillars">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">02</span><h2>The three pillars</h2></div>
+    <p class="lead reveal" data-reveal>Three ways we use Claude at Cane Creek. Each solves a different problem. Together they cover almost every workflow on the team.</p>
+
+    <div class="pillars stagger" data-reveal>
+      <div class="pillar">
+        <div class="picon"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg></div>
+        <div class="pn">Pillar 01</div>
+        <h3>Personal AI</h3>
+        <p class="def">Your everyday collaborator. The chat window. No setup. Open the app, type, get a working answer in seconds.</p>
+        <div class="when">Reach for it when</div>
+        <ul><li>You're staring at a blank page</li><li>You want a second opinion</li><li>You want to start almost anything</li></ul>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg viewBox="0 0 24 24"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Z"/><path d="M4 7v10c0 1.7 3.6 3 8 3s8-1.3 8-3V7"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></div>
+        <div class="pn">Pillar 02</div>
+        <h3>Ask Cane Creek</h3>
+        <p class="def">The company's brain, one chat away. Brand assets, price list, catalog, and voice references, all searchable. Ask once, get a cited answer.</p>
+        <div class="when">Reach for it when</div>
+        <ul><li>You'd dig through Dropbox or Teams</li><li>You need a sourced, verifiable answer</li><li>You'd ask a colleague "do we have a doc for X?"</li></ul>
+      </div>
+      <div class="pillar">
+        <div class="picon"><svg viewBox="0 0 24 24"><path d="M3 6h18M3 6v12h18V6M8 10l-2 2 2 2M16 10l2 2-2 2M13 9l-2 6"/></svg></div>
+        <div class="pn">Pillar 03</div>
+        <h3>Cowork</h3>
+        <p class="def">Claude with hands. Reads and writes files, runs code, builds docs and sites, browses the web. Real deliverables, not just text.</p>
+        <div class="when">Reach for it when</div>
+        <ul><li>The task involves files or data</li><li>You need a finished artifact</li><li>You'd copy chat output into a file anyway</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SETUP -->
+<section class="block" id="setup">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">03</span><h2>Setup and settings</h2></div>
+    <p class="lead reveal" data-reveal>If your setup is wrong, you fight the tool every day. Get these in place once.</p>
+
+    <div class="setup-grid">
+      <div>
+        <div class="minihead">Three things to switch on</div>
+        <div class="checks reveal" data-reveal>
+          <div class="check"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span><div><b>Personalize your settings</b><span>Profile, then Settings. Tell Claude about you and how you work. This context persists across every chat.</span></div></div>
+          <div class="check"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span><div><b>Turn on capabilities and connectors</b><span>Enable anything useful. Memory and reference matter most. You can even import history from ChatGPT.</span></div></div>
+          <div class="check"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span><div><b>Choose the right model</b><span>Turn on adaptive thinking and the most capable model for complex work. Faster models trade depth for speed.</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="minihead">Build your first Project in four steps</div>
+        <ol class="steps reveal" data-reveal>
+          <li><b>Create a Project</b><span>Pick one focused use case. Don't make one Project do everything.</span></li>
+          <li><b>Load the right files</b><span>Voice docs, templates, samples. Whatever a new hire would need.</span></li>
+          <li><b>Write good instructions</b><span>Role, audience, tone, rules. Tell it what to never do.</span></li>
+          <li><b>Use it and refine it</b><span>Every chat shows what's missing. Add files, tighten, repeat.</span></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="block" id="security">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">04</span><h2>Security and data</h2></div>
+    <p class="lead reveal" data-reveal>The worry I hear most: "if I put it into Claude, it becomes public, or it trains the AI." On our Team plan, that is not how it works.</p>
+
+    <div class="twocol">
+      <div>
+        <div class="minihead">What's actually true on Team</div>
+        <div class="checks reveal" data-reveal>
+          <div class="check"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span><div><b>Anthropic doesn't train on our conversations by default</b><span>Claude Team runs on commercial terms. Team inputs and outputs aren't used to train models, aren't sold, and nothing you type is posted anywhere public. The training opt-in and five-year retention change that made the news applies to personal Free, Pro, and Max accounts, not Team. The one exception, the thumbs up/down feedback button, has been switched off for the whole organization.</span></div></div>
+          <div class="check"><span class="ck"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg></span><div><b>Cane Creek controls the data, not Anthropic</b><span>Under the commercial terms, our organization owns the inputs and outputs. Anthropic processes the data only to provide the service, on our instructions.</span></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="minihead">True caveats worth knowing</div>
+        <div class="checks reveal" data-reveal>
+          <div class="check note"><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.6v.6"/></svg></span><div><b>The data does leave our network</b><span>It's handled by Anthropic on our behalf, the same as any cloud software we already use.</span></div></div>
+          <div class="check note"><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.6v.6"/></svg></span><div><b>The Primary Owner (James) can export workspace data</b><span>That can include conversations and uploaded files. Day to day, admins see usage information, not your live chats.</span></div></div>
+          <div class="check note"><span class="ck"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.6v.6"/></svg></span><div><b>Deleted conversations are purged on a schedule</b><span>Once removed, they're cleared from Anthropic's systems on a set timeline.</span></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bigstate reveal" data-reveal>
+      <p>The real question isn't whether Claude is safe. It's <span>what we're allowed to put into any outside tool</span>, AI or not. That's a data-classification question, and it applies to every third-party tool we use.</p>
+    </div>
+
+    <div class="minihead">A rule most people can remember</div>
+    <div class="lights stagger" data-reveal>
+      <div class="light green"><div class="lh"><span class="ldot"></span><span class="lname">Green · use freely</span></div><p>Public information and general drafting. No second thoughts needed.</p></div>
+      <div class="light yellow"><div class="lh"><span class="ldot"></span><span class="lname">Yellow · pause</span></div><p>Anything you're not sure about. Take a moment of judgment, or ask, before it goes in.</p></div>
+      <div class="light red"><div class="lh"><span class="ldot"></span><span class="lname">Red · keep out</span></div><p>Customer and partner confidentiality, supplier confidentiality, contract-restricted information, and our own trade secrets. These stay out of any outside tool.</p></div>
+    </div>
+
+    <div class="callout reveal" data-reveal>
+      <span class="clabel">Note</span>
+      <p>This isn't legal advice. I can explain how the tool works, but I can't tell you what our customer and supplier agreements require. Defining these categories needs the right owners.</p>
+    </div>
+
+    <p class="lead reveal" data-reveal style="margin-top:30px;margin-bottom:0;">Why this matters: research from the Asheville BrAIn Hub summit was clear that fear is the default reaction. Lead with fear and we bolt the doors and lose most of the value. Pretend there are no limits and we eventually have an incident. A clear, simple rule set is how we get the upside without being reckless.</p>
+  </div>
+</section>
+
+<!-- PLAYBOOK -->
+<section class="block" id="playbook">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">05</span><h2>The prompting playbook</h2></div>
+    <p class="lead reveal" data-reveal>The other 80% of Claude. Every good session runs the loop below. Filter the tactics by phase, and expand the ones you want.</p>
+
+    <div class="loop stagger" data-reveal>
+      <div class="loopstep"><div class="ls">STEP 01</div><b>Set context</b><p>Goal, audience, format, examples, constraints.</p></div>
+      <div class="loopstep"><div class="ls">STEP 02</div><b>Dialogue</b><p>Back and forth. Interview each other. Show, don't tell.</p></div>
+      <div class="loopstep"><div class="ls">STEP 03</div><b>Iterate</b><p>First draft is rarely the last. Refine, redirect, push back.</p></div>
+      <div class="loopstep"><div class="ls">STEP 04</div><b>Validate</b><p>Check what matters. Trust your eyes on the rest.</p></div>
+    </div>
+
+    <div class="filters" id="filters" role="tablist">
+      <button class="on" data-f="all">All</button>
+      <button data-f="context">Context</button>
+      <button data-f="dialogue">Dialogue</button>
+      <button data-f="iterate">Iterate</button>
+      <button data-f="validate">Validate</button>
+    </div>
+
+    <div class="acc" id="acc">
+      <!-- CONTEXT -->
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Context is king</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>The single most important habit. <b>The new-hire test:</b> if an intelligent new employee couldn't do the task with what you just said, neither can Claude.</p>
+          <p>Context means the goal, the audience, the constraints, the source material, and the history of what you've tried. Without it, Claude fills the gaps with its best guess, which is where generic and off-brand output comes from.</p>
+          <p>Don't worry about overloading it. It reads roughly 750,000 words of context, about the first four or five Harry Potter books. Don't hold back.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Pick the right knowledge mode</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Most people use the wrong one for the task.</p>
+          <div class="tablescroll"><table class="mini">
+            <tr><th>Mode</th><th>Use for</th><th>Avoid for</th></tr>
+            <tr><td><b>Pre-trained</b></td><td>Stable concepts, brainstorming, drafting, explanations</td><td>Current events, prices, recent specs</td></tr>
+            <tr><td><b>Web search</b></td><td>Anything recent, local info, regulations, current prices</td><td>Complex multi-source synthesis</td></tr>
+            <tr><td><b>Deep research</b></td><td>Market research, competitor reviews, evidence-heavy work</td><td>Simple lookups (slow, overkill)</td></tr>
+          </table></div>
+          <p style="margin-top:12px;">Citations are not reliability. Tell Claude which sources to prioritize and ask for a confidence rating on each conclusion.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Show, don't just tell</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Words describe. Examples define. Instead of "write in our voice," say "match the voice of these three articles" and attach them.</p>
+          <p>Attach existing work to match, mockups and screenshots, reference docs, voice memos pasted as text, or competitor pages. If you'd send a contractor an example file, send it to Claude too.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Define what "done" looks like</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>The biggest reason responses miss is missing success criteria. State the outcome, not just the deliverable.</p>
+          <div class="ex">"Draft a 200-word launch email for dealers. Subject under 40 characters. Three features as bullets, CTA to pre-order. Success = a dealer reads it in 30 seconds and clicks to buy."</div>
+          <p>Other framings: "Success = I can paste this straight into Shopify." "Success = I don't have to edit it before sending."</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Tell Claude what to avoid</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Default Claude has habits. Some you don't want. Build a personal list and put it in Settings under "Instructions for Claude."</p>
+          <ul><li>No em dashes</li><li>No filler ("in today's world," "navigate the landscape")</li><li>No invented specs, dates, or numbers</li><li>No products outside our catalog</li><li>No competitor name-checking</li></ul>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Demand the shape</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Specify the format or you get medium-length prose by default, often wrong for the task. "Markdown table with columns X, Y, Z." "Five bullets, max eight words each." "Numbered steps, one sentence each."</p>
+          <p>Side benefit: if you can't describe the shape of the answer, you might not yet know what you're asking for.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>Let Claude write the prompt</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Stop trying to write the perfect prompt. Have Claude write it, then run it in a fresh chat.</p>
+          <div class="ex">"I want to [goal]. Write me the best possible prompt to achieve this. Include the context I should attach, the constraints, and the examples I should provide."</div>
+          <p>It knows what it responds to, and it surfaces format and constraint ideas you'd skip.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="context">
+        <div class="ihead"><span class="ph">Context</span><h4>"You are an expert in..." (use with judgment)</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Often overhyped. Modern Claude usually infers the role from the task. It still helps for mimicking a specific voice, framing an ambiguous task ("act as a CRO specialist, flag friction"), or switching tone mid-thread.</p>
+          <p>It doesn't help once you've attached examples or set context in a Project.</p>
+        </div></div></div>
+      </div>
+
+      <!-- DIALOGUE -->
+      <div class="item" data-phase="dialogue">
+        <div class="ihead"><span class="ph">Dialogue</span><h4>Ask Claude to interview you</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>The shortcut to a better result. Give Claude what you know and let it pull the rest.</p>
+          <div class="ex">"Before you start, interview me. Ask whatever you need to do this well. One question at a time."</div>
+          <p>It's better at spotting missing context than you are, and your "prompt" becomes the answers you give. Use it for anything complex or new; skip it for quick rewrites.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="dialogue">
+        <div class="ihead"><span class="ph">Dialogue</span><h4>Tell Claude how to talk to you</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Default Claude is friendly and agreeable. Sycophancy is a default, not a feature. Turn it off.</p>
+          <ul><li>Skip the friendly preamble, get to the answer</li><li>Be skeptical, don't agree unless I make the case</li><li>If something is weak, tell me, don't soften it</li><li>Push back if my premise is wrong before answering</li></ul>
+          <p>Stronger still: build a rubric with binary yes/no criteria. That removes the wiggle room where agreement bias hides.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="dialogue">
+        <div class="ihead"><span class="ph">Dialogue</span><h4>Think with Claude, not just through it</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Not every prompt needs to produce something. Often the highest value is pressure-testing your thinking.</p>
+          <p>"Here's my plan, poke holes in it." "Argue against this, be hard on it." "What's the strongest case for the opposite decision?" Use it when making a decision, building strategy, or about to commit time or money.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="dialogue">
+        <div class="ihead"><span class="ph">Dialogue</span><h4>Know when to start fresh</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Long chats get messy: Claude repeats itself, ignores earlier instructions, or gets vague. When that starts:</p>
+          <div class="ex">"Summarize what we've decided so far so I can paste it into a new chat as context."</div>
+          <p>Open a new chat, paste the summary, reattach files, continue. A fresh chat with good context beats a long chat with degraded context every time.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="dialogue">
+        <div class="ihead"><span class="ph">Dialogue</span><h4>Team learning is collective</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>The fastest way to get better is to see how other people use it. Share prompts that worked, the ones that failed and why, and your Project setups.</p>
+          <p>Ask Claude directly: "What do power users do that I'm probably not doing?" or "Critique how I'm using you. Where am I leaving value on the table?"</p>
+        </div></div></div>
+      </div>
+
+      <!-- ITERATE -->
+      <div class="item" data-phase="iterate">
+        <div class="ihead"><span class="ph">Iterate</span><h4>Don't accept first answers</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Claude agrees by default and won't push back unless asked. The most dangerous response is a confident, plausible, wrong one. Keep these handy:</p>
+          <ul><li>"How confident are you? Where could you be wrong?"</li><li>"What sources did you use? Are any claims unverifiable?"</li><li>"What are the failure points in this plan?"</li><li>"What would a skeptical PM, customer, engineer, or lawyer say?"</li></ul>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="iterate">
+        <div class="ihead"><span class="ph">Iterate</span><h4>Make Claude grade itself</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Force a second pass before you start diagnosing problems yourself.</p>
+          <div class="ex">"Grade this against my brief, 1 to 10. List the three weakest parts. Then rewrite to fix them."</div>
+          <p>Variations: "Where does this drift from the brand voice?" "What would a harsh editor cut?" Sharpen it by swapping the 1-to-10 for binary yes/no criteria.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="iterate">
+        <div class="ihead"><span class="ph">Iterate</span><h4>Outline before you draft</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>AI slop comes from asking for the finished article up front. Shape the skeleton first: define goal, build the outline, critique and reorder it, then expand and draft section by section.</p>
+          <p>Changing one word in the outline reshapes a whole section. Changing one word in finished prose just changes that word. The outline is the leverage point.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="iterate">
+        <div class="ihead"><span class="ph">Iterate</span><h4>Ask for more, but define "more"</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>"Make it polished" is vague. Be specific about the bar.</p>
+          <div class="ex">"Production-grade. Could ship to a customer. Cite every claim. Match the voice in [attached]. No filler, no AI-flavored phrasing."</div>
+          <p>Templates: "Engineering-grade, every number traceable." "Editorial-grade, cuts a level harder than the first draft." Ambition with specifics produces real work; without specifics it just produces longer mediocre work.</p>
+        </div></div></div>
+      </div>
+
+      <!-- VALIDATE -->
+      <div class="item" data-phase="validate">
+        <div class="ihead"><span class="ph">Validate</span><h4>Calibrate for the stakes</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Not every task needs the full routine.</p>
+          <div class="tablescroll"><table class="mini">
+            <tr><th>Stakes</th><th>Examples</th><th>Approach</th></tr>
+            <tr><td><b>Low</b></td><td>Quick rewrite, summary, brainstorm</td><td>Short prompt, one round, ship</td></tr>
+            <tr><td><b>Medium</b></td><td>Dealer email, product copy, internal report</td><td>Context + format + constraints, one or two iterations</td></tr>
+            <tr><td><b>High</b></td><td>Technical article, customer claim, strategy, code</td><td>Full setup, interrogation, self-critique, manual review of every fact</td></tr>
+          </table></div>
+          <p style="margin-top:12px;">Over-prompting low-stakes tasks burns time. Under-prompting high-stakes tasks burns trust.</p>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="validate">
+        <div class="ihead"><span class="ph">Validate</span><h4>Five quiet ways prompts get worse</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <ul>
+            <li><b>Vague prompts</b> — be direct: "Do X. Constraints: Y. Format: Z."</li>
+            <li><b>Apologizing instead of redirecting</b> — "This missed on tone and length. Shorter, more direct."</li>
+            <li><b>Giving up after one bad answer</b> — first responses are drafts; the dialog is the work.</li>
+            <li><b>Trusting confident answers blind</b> — especially numbers, dates, specs, citations.</li>
+            <li><b>One mega-chat for everything</b> — context bleed. One chat per topic.</li>
+          </ul>
+        </div></div></div>
+      </div>
+      <div class="item" data-phase="validate">
+        <div class="ihead"><span class="ph">Validate</span><h4>Get a second opinion (AI council)</h4><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></div>
+        <div class="ibody"><div class="ibody-in"><div class="ibody-pad">
+          <p>Use other AIs as a sanity check when you're stuck, when you want a no-context critique of your prompt, or when validating high-stakes claims. Paste your prompt into ChatGPT or Gemini and ask "what's missing?", or run the same task in two models and compare.</p>
+          <p>This adds friction, so don't make it the default. Reach for it when stuck or when the stakes justify the time.</p>
+        </div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMPT LIBRARY -->
+<section class="block" id="library">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">06</span><h2>Copy-paste prompt library</h2></div>
+    <p class="lead reveal" data-reveal>The most reusable lines from both decks. Hit copy and drop them straight into a chat or your settings.</p>
+
+    <div class="prompts stagger" data-reveal>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Negative constraints</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>No em dashes. No filler phrases like "in today's world" or "navigate the landscape." No invented specs, dates, or numbers. No products outside our catalog. No competitor name-checking. No emoji or exclamation marks.</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Interview me first</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>Before you start, interview me. Ask whatever you need to do this well. One question at a time. Use multiple choice where possible, and stop after about nine questions.</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Let Claude write the prompt</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>I want to [goal]. I'm going to use Claude to do it. Write me the best possible prompt to achieve this. Include any context I should attach, any constraints I should set, and any examples I should provide.</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Turn off the agreeableness</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>Skip the friendly preamble and get to the answer. Be skeptical and don't agree unless I make the case. If something here is weak, tell me directly and don't soften it. Flag every claim you're unsure about. Push back if my premise is wrong before you answer.</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Make Claude grade itself</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>Grade this against my brief, 1 to 10. List the three weakest parts. Then rewrite to fix them.</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Interrogate before trusting</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>How confident are you in this, and where could you be wrong? What sources did you use, and are any claims unverifiable? What's the strongest counter-argument? What are the failure points? What would a skeptical PM, customer, engineer, or lawyer say?</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Hand off to a fresh chat</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>Summarize what we've decided so far so I can paste it into a new chat as context. Include the goal, the key decisions, and what still needs work.</pre>
+      </div>
+      <div class="pc">
+        <div class="pc-head"><span class="t">Push for a higher bar</span><button class="copybtn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>Copy</button></div>
+        <pre>Production-grade. Could ship to a customer. Cite every claim. Match the voice in [attached]. No filler, no AI-flavored phrasing.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROOF -->
+<section class="block" id="proof">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">07</span><h2>What's been built here</h2></div>
+    <p class="lead reveal" data-reveal>Real things built in-house with Claude. Proof of what a small team can do.</p>
+
+    <div class="stats stagger" data-reveal>
+      <div class="stat"><div class="big">9,000+</div><div class="cap">files in a messy Downloads folder, sorted in about an hour</div></div>
+      <div class="stat"><div class="big">~750k</div><div class="cap">words of context Claude can read in one go</div></div>
+      <div class="stat"><div class="big">2&ndash;4</div><div class="cap">publishable articles a month from the content engine</div></div>
+      <div class="stat"><div class="big">25+</div><div class="cap">live controls in a 3D viewer built with zero coding</div></div>
+    </div>
+
+    <div class="cases">
+      <div class="case reveal" data-reveal>
+        <h3 class="ct">RCGS — the content engine</h3>
+        <p>A production-grade system for the journal, not a writing prompt. Three article archetypes, voice anchors from published work, a full product reference, and hard gates that require sign-off before competitor comparisons ship. Output is a CMS-ready post with meta, FAQ, and schema.</p>
+        <div class="lesson">Build the system, not the prompt.</div>
+      </div>
+      <div class="case reveal" data-reveal>
+        <h3 class="ct">EMDE — the email engine</h3>
+        <p>A Project loaded with performance baselines, the subject-line library, and the flow inventory. One line kicks off a calendar, and it reasons from the loaded data: kills weak send days, pushes data-backed promotions, and flags gaps on its own.</p>
+        <div class="lesson">Load the data once. Claude reasons from it forever.</div>
+      </div>
+      <div class="case reveal" data-reveal>
+        <h3 class="ct">9,000 files, sorted</h3>
+        <p>Pointed Cowork at years of clutter. It scanned and categorized everything, proposed a clean folder tree, and did the moving after review. Not perfect, but far better than the chaos, and an otherwise unreasonable task got done.</p>
+        <div class="lesson">The impossible task becomes a one-hour task.</div>
+      </div>
+      <div class="case reveal" data-reveal>
+        <h3 class="ct">The bicycle scaler</h3>
+        <p>A 3D parametric bike viewer built from zero programming: live geometry math, collision detection, hundreds of lines of React. Never a polished product, but further than seemed possible.</p>
+        <div class="lesson">The horizon expansion is the win.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIMITS -->
+<section class="block" id="limits">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">08</span><h2>Where Claude isn't the right tool</h2></div>
+    <p class="lead reveal" data-reveal>Knowing the limits is part of using it well. Finding one is itself a win.</p>
+
+    <div class="limits stagger" data-reveal>
+      <div class="limit"><b>Real-time and live data</b><span>It can't see today's prices or live analytics unless you enable web search.</span><span class="use">Use → live dashboards, or turn on the web tool</span></div>
+      <div class="limit"><b>Deep CAD and simulation</b><span>Suspension dynamics, FEA, fluid sim, production CAD.</span><span class="use">Use → SolidWorks, Ansys, Linkage. Claude helps around them</span></div>
+      <div class="limit"><b>Hands-on physical testing</b><span>Ride feel, lab measurements, prototyping.</span><span class="use">Use → actual humans on actual bikes. Claude documents results</span></div>
+      <div class="limit"><b>Highly specialized expert work</b><span>Legal review, regulatory filings, medical decisions, niche negotiations.</span><span class="use">Use → a qualified expert. Claude helps you prepare</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- DO / DON'T -->
+<section class="block" id="habits">
+  <div class="wrap">
+    <div class="eyebrow reveal" data-reveal><span class="idx">09</span><h2>Do's and don'ts</h2></div>
+    <div class="dd">
+      <div class="ddcol do reveal" data-reveal>
+        <h3><svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12l5 5L20 6"/></svg>Do</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Give it real context: files, examples, audience, goal</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Start small to build the habit, then push hard</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Iterate — your first prompt is rarely your best</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Validate the output, especially technical claims</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Try the task you've been avoiding as too big</li>
+          <li><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Build reusable Projects for workflows you repeat</li>
+        </ul>
+      </div>
+      <div class="ddcol dont reveal" data-reveal>
+        <h3><svg viewBox="0 0 24 24" width="18" height="18"><path d="M6 6l12 12M18 6L6 18"/></svg>Don't</h3>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Treat it like a search engine and stop there</li>
+          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Expect a perfect, finished output on the first try</li>
+          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Skip validation on technical or factual claims</li>
+          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Give up after one bad answer</li>
+          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Assume it can't do something without testing it</li>
+          <li><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>Use it for sensitive personal data without thinking it through</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="ftgrid">
+      <div>
+        <h4>One last thing</h4>
+        <p class="ftclose">Claude is a partner. Use it like one. Start a real task this week.</p>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <p>Questions? Ask Ben or ask Claude. No question is too small, especially the ones that start with "Can Claude do...?"</p>
+        <p>Want to load a doc into Ask Cane Creek? Send Ben the file. We review for sensitivity, then add it.</p>
+      </div>
+      <div>
+        <h4>Go deeper</h4>
+        <p><a class="link" href="https://youtu.be/8ib4Qnh2HFE" target="_blank" rel="noopener">Andrew Ng's AI Prompting Course</a> — where most of these ideas come from.</p>
+        <p><a class="link" href="https://docs.claude.com" target="_blank" rel="noopener">docs.claude.com</a> — features, models, settings.</p>
+        <p>Both full decks are in the original emails for the complete version.</p>
+      </div>
+    </div>
+    <div class="ftbar">
+      <span>Cane Creek · Claude Field Guide</span>
+      <span>Internal use · Built with Claude</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* scroll progress */
+  var bar = document.getElementById('progress');
+  function onScroll(){
+    var h = document.documentElement;
+    var max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max>0 ? (h.scrollTop/max*100) : 0) + '%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* reveal on scroll */
+  var revs = document.querySelectorAll('[data-reveal]');
+  if(reduce || !('IntersectionObserver' in window)){
+    revs.forEach(function(el){ el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -10% 0px', threshold:.12});
+    revs.forEach(function(el){ io.observe(el); });
+  }
+
+  /* scroll-spy nav */
+  var links = Array.prototype.slice.call(document.querySelectorAll('.navlinks a'));
+  var map = {};
+  links.forEach(function(a){ var id=a.getAttribute('href').slice(1); var s=document.getElementById(id); if(s) map[id]=a; });
+  if('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          links.forEach(function(l){ l.classList.remove('active'); });
+          var a = map[e.target.id];
+          if(a) a.classList.add('active');
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    Object.keys(map).forEach(function(id){ spy.observe(document.getElementById(id)); });
+  }
+
+  /* accordion */
+  document.querySelectorAll('.item .ihead').forEach(function(head){
+    head.addEventListener('click', function(){
+      head.parentElement.classList.toggle('open');
+    });
+  });
+
+  /* playbook filter */
+  var fbtns = document.querySelectorAll('#filters button');
+  var items = document.querySelectorAll('#acc .item');
+  fbtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      fbtns.forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      var f = btn.getAttribute('data-f');
+      items.forEach(function(it){
+        var show = (f==='all' || it.getAttribute('data-phase')===f);
+        it.classList.toggle('hide', !show);
+        if(!show) it.classList.remove('open');
+      });
+    });
+  });
+
+  /* copy buttons */
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var pre = btn.closest('.pc').querySelector('pre');
+      var text = pre.innerText;
+      var done = function(){
+        var orig = btn.innerHTML;
+        btn.classList.add('done');
+        btn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"/></svg>Copied';
+        setTimeout(function(){ btn.classList.remove('done'); btn.innerHTML = orig; }, 1700);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){ fallback(text); done(); });
+      } else { fallback(text); done(); }
+    });
+  });
+  function fallback(text){
+    var ta=document.createElement('textarea'); ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
+</body>
+</html>
